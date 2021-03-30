@@ -25,13 +25,19 @@ export default function Mega(props) {
     }
 
     const [finalNumbers, setFinalNumbers] = useState(Array(6).fill(0))
+    const [amount, setAmount] = useState(props.amount || 6)
+
+    function handleAmount(e) {
+        setAmount(+e.target.value) // '+' converts to number. without it it's a string and it won't work
+    }
 
 
     return (
         <div>
             <h2>Mega sena</h2>
             <h3>{finalNumbers.join(' - ')}</h3>
-            <button onClick={_ => setFinalNumbers(generateNumbers(5))}>Gerar números</button>
+            <input value={amount} onChange={handleAmount}></input>
+            <button onClick={_ => setFinalNumbers(generateNumbers(amount))}>Gerar {amount} número(s)</button>
         </div>
     )
 }
